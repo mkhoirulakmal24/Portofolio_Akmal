@@ -66,6 +66,54 @@ if (aboutCard) {
     });
 }
 
+// Mobile Menu Toggle
+document.addEventListener('DOMContentLoaded', function() {
+    // Tambahkan tombol hamburger menu jika belum ada
+    const navContainer = document.querySelector('.nav-container');
+    if (!document.querySelector('.menu-toggle')) {
+        const menuToggle = document.createElement('div');
+        menuToggle.classList.add('menu-toggle');
+        menuToggle.innerHTML = `
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        `;
+        navContainer.appendChild(menuToggle);
+        
+        // Tambahkan event listener untuk menu toggle
+        menuToggle.addEventListener('click', function() {
+            const navLinks = document.querySelector('.nav-links');
+            navLinks.classList.toggle('active');
+            
+            // Animasi hamburger menu
+            const bars = menuToggle.querySelectorAll('.bar');
+            bars.forEach((bar, index) => {
+                if (navLinks.classList.contains('active')) {
+                    if (index === 0) bar.style.transform = 'rotate(-45deg) translate(-5px, 6px)';
+                    if (index === 1) bar.style.opacity = '0';
+                    if (index === 2) bar.style.transform = 'rotate(45deg) translate(-5px, -6px)';
+                } else {
+                    bar.style.transform = 'none';
+                    bar.style.opacity = '1';
+                }
+            });
+        });
+        
+        // Tutup menu saat link diklik
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                const navLinks = document.querySelector('.nav-links');
+                navLinks.classList.remove('active');
+                const bars = menuToggle.querySelectorAll('.bar');
+                bars.forEach(bar => {
+                    bar.style.transform = 'none';
+                    bar.style.opacity = '1';
+                });
+            });
+        });
+    }
+});
+
 // Debug: Check if sections exist
 console.log('Education section:', document.getElementById('education'));
 console.log('Experience section:', document.getElementById('experience'));
@@ -120,6 +168,56 @@ style.textContent = `
         }
         50% {
             transform: translateY(-20px);
+        }
+    }
+    
+    /* Mobile Menu Styles */
+    .menu-toggle {
+        display: none;
+        flex-direction: column;
+        cursor: pointer;
+    }
+    
+    .bar {
+        width: 25px;
+        height: 3px;
+        background-color: rgb(17, 0, 0);
+        margin: 3px 0;
+        transition: 0.3s;
+    }
+    
+    @media screen and (max-width: 768px) {
+        .menu-toggle {
+            display: flex;
+        }
+        
+        .nav-links {
+            position: fixed;
+            left: -100%;
+            top: 70px;
+            flex-direction: column;
+            background-color: rgba(255, 255, 255, 0.95);
+            width: 100%;
+            text-align: center;
+            transition: 0.3s;
+            box-shadow: 0 10px 27px rgba(0, 0, 0, 0.05);
+            padding: 20px 0;
+        }
+
+        .nav-links.active {
+            left: 0;
+        }
+
+        .nav-links li {
+            margin: 10px 0;
+        }
+
+        .nav-links a {
+            color: var(--dark-color);
+        }
+
+        .nav-links a::after {
+            background: var(--primary-color);
         }
     }
 `;
