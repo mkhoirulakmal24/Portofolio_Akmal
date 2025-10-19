@@ -161,6 +161,21 @@ nav.scrolled {
     width: 100%;
 }
 
+/* Mobile Menu Toggle */
+.menu-toggle {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+}
+
+.bar {
+    width: 25px;
+    height: 3px;
+    background-color: rgb(17, 0, 0);
+    margin: 3px 0;
+    transition: 0.3s;
+}
+
 /* Hero Section */
 .hero {
     height: 100vh;
@@ -546,9 +561,9 @@ section {
     position: relative;
     opacity: 1 !important;
     transform: none !important;
-    max-width: 400px; /* 增加了最大宽度 */
-    width: 100%; /* 确保在小屏幕上仍然响应式 */
-    margin: 0 auto; /* 居中显示 */
+    max-width: 400px;
+    width: 100%;
+    margin: 0 auto;
 }
 
 .project-card:hover {
@@ -738,67 +753,6 @@ footer {
     transform: rotateX(-90deg) translateZ(75px);
 }
 
-/* Responsive */
-@media screen and (max-width: 768px) {
-    nav {
-        padding: 15px 20px;
-    }
-
-    .nav-links {
-        display: none;
-    }
-
-    .hero-card {
-        padding: 30px 20px;
-    }
-
-    .hero-content h1 {
-        font-size: 28px;
-    }
-
-    .hero-content h2 {
-        font-size: 20px;
-    }
-
-    .cta-buttons {
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .skill-card {
-        width: 100%;
-    }
-
-    .timeline::after {
-        left: 31px;
-    }
-
-    .timeline-item {
-        width: 100%;
-        padding-left: 70px;
-        padding-right: 25px;
-    }
-
-    .timeline-item::before {
-        left: 60px;
-        border: medium solid white;
-        border-width: 10px 10px 10px 0;
-        border-color: transparent white transparent transparent;
-    }
-
-    .left::after, .right::after {
-        left: 18px;
-    }
-
-    .right {
-        left: 0%;
-    }
-
-    .cube-container {
-        display: none;
-    }
-}
-
 /* About Section - Single Card */
 .about-container {
     max-width: 800px;
@@ -854,8 +808,102 @@ footer {
     line-height: 1.8;
 }
 
-/* Responsive untuk About Section */
+/* Contact Section - Three Cards Grid */
+#contact .cards-grid {
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
+
+/* Responsive Design */
+@media screen and (max-width: 992px) {
+    .timeline::after {
+        left: 31px;
+    }
+    
+    .timeline-item {
+        width: 100%;
+        padding-left: 70px;
+        padding-right: 25px;
+    }
+    
+    .timeline-item::before {
+        left: 60px;
+        border: medium solid white;
+        border-width: 10px 10px 10px 0;
+        border-color: transparent white transparent transparent;
+    }
+
+    .left::after, .right::after {
+        left: 18px;
+    }
+    
+    .right {
+        left: 0%;
+    }
+}
+
 @media screen and (max-width: 768px) {
+    nav {
+        padding: 15px 20px;
+    }
+
+    .menu-toggle {
+        display: flex;
+    }
+
+    .nav-links {
+        position: fixed;
+        left: -100%;
+        top: 70px;
+        flex-direction: column;
+        background-color: rgba(255, 255, 255, 0.95);
+        width: 100%;
+        text-align: center;
+        transition: 0.3s;
+        box-shadow: 0 10px 27px rgba(0, 0, 0, 0.05);
+        padding: 20px 0;
+    }
+
+    .nav-links.active {
+        left: 0;
+    }
+
+    .nav-links li {
+        margin: 10px 0;
+    }
+
+    .nav-links a {
+        color: var(--dark-color);
+    }
+
+    .nav-links a::after {
+        background: var(--primary-color);
+    }
+
+    .hero-card {
+        padding: 30px 20px;
+    }
+
+    .hero-content h1 {
+        font-size: 28px;
+    }
+
+    .hero-content h2 {
+        font-size: 20px;
+    }
+
+    .cta-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .skill-card {
+        width: 100%;
+    }
+
+    .cube-container {
+        display: none;
+    }
+
     .about-card {
         padding: 30px 20px;
     }
@@ -867,16 +915,48 @@ footer {
     .about-card .card-content {
         font-size: 16px;
     }
-}
 
-/* Contact Section - Three Cards Grid */
-#contact .cards-grid {
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-}
-
-@media screen and (max-width: 768px) {
     #contact .cards-grid {
         grid-template-columns: 1fr;
     }
 }
 
+@media screen and (max-width: 576px) {
+    .hero {
+        padding: 0 15px;
+    }
+    
+    .hero-card {
+        padding: 20px 15px;
+    }
+    
+    .profile-img {
+        width: 150px;
+        height: 150px;
+    }
+    
+    .hero-content h1 {
+        font-size: 24px;
+    }
+
+    .hero-content h2 {
+        font-size: 18px;
+    }
+    
+    section {
+        padding: 60px 15px;
+    }
+    
+    .section-title {
+        font-size: 28px;
+    }
+    
+    .timeline-item {
+        padding-left: 50px;
+        padding-right: 15px;
+    }
+    
+    .timeline-content {
+        padding: 15px 20px;
+    }
+}
